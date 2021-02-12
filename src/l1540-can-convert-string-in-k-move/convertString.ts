@@ -4,28 +4,36 @@ const halfNCharacter = totalCharacter / 2;
 const canConvertString = (s: string, t: string, k: number): boolean => {
     if (s.length !== t.length) return false;
 
-    let counts = []
+    let freq = Object.assign({});
     for (let i = 0; i < s.length; i++) {
-        counts.push(countRotation(s[i], t[i]));
-    }
-
-    let useLeft = s.length;
-    for (let shiftCount = 1, counter = 1; counter <= k; counter++, shiftCount++) {
-        shiftCount = getShift(shiftCount);
-
-        if (useLeft === 0) {
-            break;
-        }
-        for (let i = 0; i < counts.length; i++) {
-            if (counts[i] === shiftCount && shiftCount !== 0) {
-                counts[i] = 0;
-                useLeft--;
-                break;
+        const count = countRotation(s[i], t[i]);
+        if (count !== 0) {
+            if (!freq[count]) {
+                freq[count] = 0;
             }
+            freq[count]++;
         }
     }
-    const sum = counts.reduce((sum, value) => sum + value, 0)
-    return sum === 0;
+
+    const quotient = Math.floor(k / 26);
+    const remainder = k % 26;
+
+    console.log(freq)
+    console.log(quotient, remainder)
+    let result = true;
+    Object.keys(freq).forEach(key => {
+        const value = freq[key];
+        if (value <= quotient) {
+            // ok
+        } else if (value === quotient + 1 && parseInt(key) <= remainder) {
+            // ok
+        } else {
+            // no ->
+            result = false;
+        }
+    })
+
+    return result;
 };
 
 const getShift = (counter: number): number => {

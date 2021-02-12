@@ -29,6 +29,10 @@ describe('convert', () => {
         const result = convertString.canConvertString('input', 'output', 9)
         expect(result).toBeFalsy()
     })
+    it('should return true when (s,t,k) is (input, ouput, 9)', () => {
+        const result = convertString.canConvertString('input', 'ouput', 9)
+        expect(result).toBeTruthy()
+    })
     it('should return true when (s,t,k) is (aab, bbb, 27)', () => {
         const result = convertString.canConvertString('aab', 'bbb', 27)
         expect(result).toBeTruthy()
