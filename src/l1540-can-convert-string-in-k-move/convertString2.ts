@@ -1,15 +1,15 @@
 const nCharacters = 26;
 
-const canConvertString2 = (s: string, t: string, k: number): boolean => {
+export const canConvertString = (s: string, t: string, k: number): boolean => {
     if (s.length !== t.length) return false
 
     let counts = [...s].map((_, i: number) => {
         return countRotate(s[i], t[i]);
     }).filter(n => n !== 0)
 
-    const freq = getFreq2(counts)
+    const freq = getFreq(counts)
 
-    const [quotient, remainder] = getQuotientAndRemainder2(k, nCharacters);
+    const [quotient, remainder] = getQuotientAndRemainder(k, nCharacters);
 
     let result = true;
     Object.keys(freq).forEach(key => {
@@ -22,11 +22,7 @@ const canConvertString2 = (s: string, t: string, k: number): boolean => {
     return result
 }
 
-module.exports = {
-    canConvertString2
-};
-
-const getFreq2 = (numbers: number[]) => {
+const getFreq = (numbers: number[]) => {
     const freq = Object.assign({})
 
     numbers.forEach(number => {
@@ -39,7 +35,7 @@ const getFreq2 = (numbers: number[]) => {
     return freq;
 }
 
-const getQuotientAndRemainder2 = (dividend: number, divisor: number): [number, number] => {
+const getQuotientAndRemainder = (dividend: number, divisor: number): [number, number] => {
     const quotient = Math.floor(dividend / divisor);
     const remainder = dividend % divisor;
     return [quotient, remainder]

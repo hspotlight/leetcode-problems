@@ -1,4 +1,4 @@
-const convertString2 = require("./convertString2")
+import { canConvertString } from "./convertString2"
 
 describe('convertString2', () => {
 
@@ -17,7 +17,7 @@ describe('convertString2', () => {
         ].forEach(input => {
             const [s, t, k, expectedResult] = input
             it(`should return ${expectedResult} when given ${s} ${t} ${k}`, () => {
-                const result = convertString2.canConvertString2(s, t, k)
+                const result = canConvertString(s.toString(), t.toString(), +k)
                 expect(result).toBe(expectedResult)
             })
         })
@@ -41,7 +41,7 @@ describe('convertString2', () => {
         ].forEach(input => {
             const [s, t, k, expectedResult] = input
             it(`should return ${expectedResult} when given ${s} ${t} ${k}`, () => {
-                const result = convertString2.canConvertString2(s, t, k)
+                const result = canConvertString(s.toString(), t.toString(), +k)
                 expect(result).toBe(expectedResult)
             })
         })

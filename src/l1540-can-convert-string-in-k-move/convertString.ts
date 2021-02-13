@@ -1,7 +1,6 @@
 const totalCharacter = 26;
-const halfNCharacter = totalCharacter / 2;
 
-const canConvertString = (s: string, t: string, k: number): boolean => {
+export const canConvertString = (s: string, t: string, k: number): boolean => {
     if (s.length !== t.length) return false;
 
     const counts = [...s].map((_, index: number) => {
@@ -43,7 +42,7 @@ const getQuotientAndRemainder = (dividend: number, divisor: number): [number, nu
     return [quotient, remainder]
 }
 
-const countRotation = (a: string, b: string): number => {
+export const countRotation = (a: string, b: string): number => {
     const charCodeA = a.charCodeAt(0);
     const charCodeB = b.charCodeAt(0);
 
@@ -53,8 +52,3 @@ const countRotation = (a: string, b: string): number => {
     }
     return totalCharacter + diff;
 }
-
-module.exports = {
-    canConvertString,
-    countRotation
-};
