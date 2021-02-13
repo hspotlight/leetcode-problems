@@ -1,8 +1,9 @@
 const nCharacters = 26;
+
 const canConvertString2 = (s: string, t: string, k: number): boolean => {
     
     let result = [...s].map((_, i: number) => {
-        return canConvert(s[i], t[i], k);
+        return countRotate(s[i], t[i]) <= k;
     }).reduce((isConvertable, is) => isConvertable && is, true)
 
     return result
@@ -12,19 +13,18 @@ module.exports = {
     canConvertString2
 };
 
-function canConvert(s: string, t: string, k: number): boolean {
-    let result;
+function countRotate(s: string, t: string): number {
+    let count;
 
     const first = s.charCodeAt(0);
     const second = t.charCodeAt(0);
     const diff = second - first;
-
     if (diff >= 0) {
-        result = diff <= k;
+        count = diff;
     } else {
         const newDiff = nCharacters + diff;
-        result = newDiff <= k;
+        count = newDiff;
     }
 
-    return result;
+    return count;
 }
