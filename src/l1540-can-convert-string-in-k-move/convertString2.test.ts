@@ -21,5 +21,19 @@ describe('convertString2', () => {
                 expect(result).toBe(expectedResult)
             })
         })
-    });
+    })
+    describe('multiple char (same length)', () => {
+
+        [
+            // only one change
+            ['ab', 'aa', 2, false],
+            ['ab', 'aa', 25, true],
+        ].forEach(input => {
+            const [s, t, k, expectedResult] = input
+            it(`should return ${expectedResult} when given ${s} ${t} ${k}`, () => {
+                const result = convertString2.canConvertString2(s, t, k)
+                expect(result).toBe(expectedResult)
+            })
+        })
+    })
 })
