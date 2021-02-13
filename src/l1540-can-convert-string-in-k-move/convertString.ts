@@ -4,31 +4,19 @@ const halfNCharacter = totalCharacter / 2;
 const canConvertString = (s: string, t: string, k: number): boolean => {
     if (s.length !== t.length) return false;
 
-    let freq = Object.assign({});
-    for (let i = 0; i < s.length; i++) {
-        const count = countRotation(s[i], t[i]);
-        if (count !== 0) {
-            if (!freq[count]) {
-                freq[count] = 0;
-            }
-            freq[count]++;
-        }
-    }
+    const counts = [...s].map((_, index: number) => {
+        return countRotation(s[index], t[index]);
+    }).filter(n => n !== 0)
 
-    const quotient = Math.floor(k / 26);
-    const remainder = k % 26;
+    let freq = getFreq(counts);
 
-    console.log(freq)
-    console.log(quotient, remainder)
+    const [quotient, remainder] = getQuotientAndRemainder(k, totalCharacter);
+
     let result = true;
     Object.keys(freq).forEach(key => {
         const value = freq[key];
-        if (value <= quotient) {
-            // ok
-        } else if (value === quotient + 1 && parseInt(key) <= remainder) {
-            // ok
+        if ((value <= quotient) || (value === quotient + 1 && parseInt(key) <= remainder)) {
         } else {
-            // no ->
             result = false;
         }
     })
@@ -36,11 +24,23 @@ const canConvertString = (s: string, t: string, k: number): boolean => {
     return result;
 };
 
-const getShift = (counter: number): number => {
-    if (counter >= totalCharacter) {
-        return counter - totalCharacter
-    }
-    return counter
+const getFreq = (numbers: number[]) => {
+    const freq = Object.assign({})
+
+    numbers.forEach(number => {
+        if (!freq[number]) {
+            freq[number] = 0;
+        }
+        freq[number]++;
+    })
+
+    return freq;
+}
+
+const getQuotientAndRemainder = (dividend: number, divisor: number): [number, number] => {
+    const quotient = Math.floor(dividend / divisor);
+    const remainder = dividend % divisor;
+    return [quotient, remainder]
 }
 
 const countRotation = (a: string, b: string): number => {

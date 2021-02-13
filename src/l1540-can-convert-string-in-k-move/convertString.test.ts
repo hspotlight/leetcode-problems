@@ -51,7 +51,6 @@ describe('convert', () => {
     })
 })
 
-// -> one way
 describe('countRotation', () => {
     it('should return 0 when given a and a', () => {
         const result = convertString.countRotation('a', 'a')
